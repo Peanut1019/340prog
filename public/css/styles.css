@@ -1,6 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+FR+Moderne:wght@100..400&display=swap');
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+:root {
+  --primary-color: #2A3AB5;
+  --second-color: #01C5FE;
+  --third-color: #857C8D;
+  --primary-back: #0F0005;
+  --second-back: #F5E6E8;
+}
+body {
+  font-family: "Playwrite FR Moderne";
+}
+.siteName {
+  font-size: 35px;
+  font-weight: bold;
+}
+.siteName a {
+  color: var(--primary-back);
+  text-decoration: none;
+}
+#tools {
+  text-align: right;
+}
+#tools a {
+  color: var(--primary-back);
+  text-decoration: none;
+}
+nav ul {
+  color: var(--second-back);
+  background-color: var(--third-color);
+  width: 100%;
+  height: fit-content;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1rem, 1rem, 1rem, 1rem;
+}
+
+li {
+  grid-column:auto;
+  grid-row: 1/2;
+  list-style: none;
+}
+nav ul li a {
+  text-decoration: none;
+  color: var(--second-back);
+}
+nav ul li a:hover {
+  color: var(--second-color);
+}
+#banner {
+  height: auto;
+  justify-items: center;
+}
+#banner img {
+ height: auto;
+ width:100%;
+}
+#ad {
+  background-color: var(--third-color);
+  width:fit-content;
+  text-align: center;
+  position: absolute;
+  opacity: 75%;
+}
+button {
+  height: 30px;
+  background-color: var(--second-color);
+  color: var(--primary-back);
+  border: var(--primary-back), 3px;
+  font-family: "Playwrite FR Moderne";
+}
+button:hover {
+  background-color: var(--primary-color);
+  color: var(--second-back);
+}
+#main {
+  display: grid;
+  grid-template-columns: 1rem, 1rem;
+  height: auto;
+}
+#upgrades {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1rem, 1rem;
+}
+#upgrades a {
+  color: var(--primary-back);
+  text-decoration: none;
+}
+#upgrades a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+#flux {
+  grid-column: 1/2;
+  background-color: var(--second-color);
+}
+#flame {
+  grid-column: 2/3;
+  background-color: var(--second-color);
+}
+#bumper {
+  grid-column: 1/2;
+  background-color: var(--second-color);
+}
+#hub {
+  grid-column: 2/3;
+  background-color: var(--second-color);
+}
+#reveiws {
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+footer {
+  height: auto;
+  background-color: var(--primary-color);
+  color: var(--second-back);
 }

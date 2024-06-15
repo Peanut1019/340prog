@@ -1,0 +1,10 @@
+@media (min-width: 650px) {
+    #upgrades {
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+    #reveiws {
+      grid-column: 2/3;
+      grid-row: 1/2;
+    }
+  }
