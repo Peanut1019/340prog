@@ -32,7 +32,7 @@ body {
 }
 nav ul {
   color: var(--second-back);
-  background-color: var(--third-color);
+  background-color: var(--primary-back);
   width: 100%;
   height: fit-content;
   text-align: center;
@@ -48,6 +48,7 @@ li {
 nav ul li a {
   text-decoration: none;
   color: var(--second-back);
+  background-color: var(--primary-back);
 }
 nav ul li a:hover {
   color: var(--second-color);
@@ -117,6 +118,37 @@ button:hover {
 #reveiws {
   grid-column: 1/2;
   grid-row: 1/2;
+}
+#inv-detail {
+  display: grid;
+  grid-template-columns: 60%, 40%;
+  text-align: center;
+}
+#inv-detail img {
+  grid-column: 1/3;
+  height: auto;
+ width:100%;
+}
+.namePrice {
+  grid-column: 1/3;
+  display: grid;
+  grid-template-columns: 1rem, 1rem;
+}
+#deets {
+  grid-column: 1/3;
+}
+#sideButtons {
+  grid-column: 1/3;
+}
+#sideButtons button {
+  width: 100%;
+}
+#sideButtons button a {
+  text-decoration: none;
+}
+#sideButtons button a:hover {
+  text-decoration: underline;
+  color: var(--second-back);
 }
 footer {
   height: auto;

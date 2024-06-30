@@ -64,3 +64,34 @@ Util.buildClassificationGrid = async function(data){
     }
     return grid
   }
+  Util.buildDetailGrid = async function(data){
+    let grid
+    if(data.length > 0){
+      grid = '<div id="inv-detail">'
+      data.forEach(vehicle => {
+        grid +=  '<img src="' + vehicle.inv_image 
+        +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
+        +' on CSE Motors" />'
+        grid += '<div class="namePrice">'
+          grid += '<div id="deets">'
+          grid += '<h1>' + vehicle.inv_year + ' ' + vehicle.inv_make + ' ' + vehicle.inv_model + '</h1>'
+          grid += '<h2>' + '<span>$' 
+          + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>' + '</h2>' 
+          grid += '<p>Mileage: ' + '<span>' + vehicle.inv_miles + '</span>' + '</p>'
+          grid += '<p>Color: ' + '<span>' + vehicle.inv_color + '</span>' + '</p>'
+          grid += '<span>' + vehicle.inv_desciption + '</span>'
+          grid += '</div>'
+          grid += '<div id="sideButtons">'
+          grid += '<button><a href="">Start Purchase</a></button>'
+          grid += '<button><a href="">Contact Support</a></button>'
+          grid += '<button><a href="">Test Drive Me</a></button>'
+          grid += '<button><a href="">Apply for Financing</a></button>'
+        grid += '</div>'
+      })
+      grid += '</div>'
+    } 
+    else { 
+      grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    }
+    return grid
+  }

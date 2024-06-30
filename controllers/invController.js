@@ -18,5 +18,33 @@ invCont.buildByClassificationId = async function (req, res, next) {
     grid,
   })
 }
+module.exports = invCont
 
+invCont.buildbyDetail = async function (req, res, next) {
+  const inv_id = req.params.invId
+  const data = await invModel.getDetailById(inv_id)
+  const grid = await utilities.buildDetailGrid(data)
+  let nav = await utilities.getNav()
+  const invName = data[0].inv_model
+  const invMake = data[0].inv_make
+  res.render("./inventory/detail", {
+    title: invName + ' ' + invMake,
+    nav,
+    grid,
+  })
+}
+module.exports = invCont
+invCont.destroyServer = async function (req, res, next) {
+  const inv_id = req.params.invId
+  // const data = await invModel.getDetailById(inv_id)
+  const grid = await utilities.buildDetailGrid(data)
+  let nav = await utilities.getNav()
+  const invName = data[1]
+  const invMake = data[0].inv_make
+  res.render("./inventory/detail", {
+    title: invName + ' ' + invMake,
+    nav,
+    grid,
+  })
+}
 module.exports = invCont

@@ -27,3 +27,34 @@ async function getInventoryByClassificationId(classification_id) {
   }
 }
 module.exports = {getClassifications, getInventoryByClassificationId};
+
+async function getMakes(){
+  return await pool.query("SELECT * FROM public.inventory ORDER BY inv_make")
+}
+module.exports = {getClassifications, getInventoryByClassificationId, getMakes}
+
+async function getModels(){
+  return await pool.query("SELECT * FROM public.inventory ORDER BY inv_model")
+}
+module.exports = {getClassifications, getInventoryByClassificationId, getMakes, getModels}
+
+async function getDetailById(inv_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.inventory AS i 
+      JOIN public.inventory AS c 
+      ON i.inv_id = c.inv_id 
+      WHERE i.inv_id = $1`,
+      [inv_id]
+    )
+    return data.rows
+  } catch (error) {
+    console.error("getdetailbymodel error " + error)
+  }
+}
+module.exports = {getClassifications, getInventoryByClassificationId, getMakes, getModels, getDetailById};
+
+// async function getColors(){
+//   return await pool.query("SELECT * FROM public.inventory ORDER BY inv_coloe")
+// }
+// module.exports = {getClassifications, getInventoryByClassificationId, getMakes, getModels, getDetailById, getColors}
