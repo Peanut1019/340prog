@@ -16,6 +16,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
     title: className + " vehicles",
     nav,
     grid,
+    errors: null,
   })
 }
 module.exports = invCont
@@ -31,6 +32,7 @@ invCont.buildbyDetail = async function (req, res, next) {
     title: invName + ' ' + invMake,
     nav,
     grid,
+    errors: null,
   })
 }
 module.exports = invCont
@@ -45,6 +47,7 @@ invCont.destroyServer = async function (req, res, next) {
     title: invName + ' ' + invMake,
     nav,
     grid,
+    errors: null,
   })
 }
 module.exports = invCont
