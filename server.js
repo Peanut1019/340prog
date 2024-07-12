@@ -18,6 +18,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const accountRoute =require("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const cookieParer = require("cookie-parser")
 /* ***********************
  * Middleware
  * ************************/
@@ -31,7 +32,7 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
-
+app.use(cookieParer())
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
@@ -40,6 +41,7 @@ app.use(function(req, res, next){
 })
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(utilities.checkJWTToken)
 /* ***********************
  * View Engine and Templates
  *************************/
