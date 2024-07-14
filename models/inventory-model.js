@@ -7,7 +7,7 @@ async function getClassifications(){
   return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
 }
 
-module.exports = {getClassifications}
+
 
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
@@ -26,17 +26,16 @@ async function getInventoryByClassificationId(classification_id) {
     console.error("getclassificationsbyid error " + error)
   }
 }
-module.exports = {getClassifications, getInventoryByClassificationId};
+
 
 async function getMakes(){
   return await pool.query("SELECT * FROM public.inventory ORDER BY inv_make")
 }
-module.exports = {getClassifications, getInventoryByClassificationId, getMakes}
+
 
 async function getModels(){
   return await pool.query("SELECT * FROM public.inventory ORDER BY inv_model")
 }
-module.exports = {getClassifications, getInventoryByClassificationId, getMakes, getModels}
 
 async function getDetailById(inv_id) {
   try {
@@ -62,7 +61,6 @@ async function checkExistingClass(classification_name) {
     return error.message
   }
 }
-module.exports = {getClassifications, getInventoryByClassificationId, getMakes, getModels, getDetailById, checkExistingClass};
 
 async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id){
   try {
