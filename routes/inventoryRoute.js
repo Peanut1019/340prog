@@ -10,12 +10,14 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:invId", utilities.handleErrors(invController.buildbyDetail));
 // router.get ("/detail/:invId", utilities.handleErrors(invController.destroyServer));
 router.get("/management", utilities.handleErrors(invController.buildManage));
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
-router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
-router.get("/delete/:inv_id", utilities.handleErrors(invController.invDelete))
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+router.get("/delete/:inv_id", utilities.handleErrors(invController.invDelete));
 router.get("/add-classification", utilities.handleErrors(invController.buildClass));
 router.get("/add-classification", utilities.handleErrors(invController.registerClass));
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInv));
 router.get("/add-inventory", utilities.handleErrors(invController.addInventory));
+
 router.post(
     "/add-classification",
     regValidate.classRules(),
