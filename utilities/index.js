@@ -10,7 +10,7 @@ Util.getNav = async function (req, res, next) {
   console.log(data)
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
-  list += '<li><a href="../inv/management" title="Manangement page">Manage</a></li>'
+  list += '<li><a href="../inv/management" title="Manangement page" id="manage" type="hidden">Manage</a></li>'
   data.rows.forEach((row) => {
     list += "<li>"
     list +=
@@ -150,5 +150,16 @@ Util.checkLogin = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+Util.checkType = (req, res, next) => {
+  if (res.locals.accountData == "Employee", "Admin") {
+    const hidden = document.querySelector("#manage")
+    hidden.removeAttribute('type="hidden"')
+    next()
+  }
+  else{
+    req.flash("notice", "No management for you!")
+  }
+}
 
   module.exports = Util

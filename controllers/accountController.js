@@ -48,6 +48,22 @@ async function buildRegister(req, res, next) {
       errors: null,
     })
   }
+  async function buildManage(req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("account/management", {
+      title: "Manage Accounts",
+      nav,
+      errors: null,
+    })
+  }
+  async function buildUpdate(req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: null,
+    })
+  }
   /* ****************************************
 *  Process Registration
 * *************************************** */
@@ -114,4 +130,87 @@ async function accountLogin(req, res) {
    return new Error('Access Forbidden')
   }
  }
- module.exports ={accountLogin, registerAccount, buildLogin, buildRegister, buildSuccess}
+
+async function manageAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const { account_firstname } = req.body
+  let grid
+  grid = '<div>'
+  if (res.locals.accountData == "Employee", "Admin") {
+    grid += '<h2> Welcome' + account_firstname + '</h2>'
+    grid += '<h3>Inventory Management</h3>'
+    grid += '<p><a href="../../inv/management/">Link Here</a></p>'
+  }
+  else {
+    grid += '<h2> Welcome' + account_firstname + '</h2>'
+  }
+  grid += '</div>'
+  res.render("account/management", {
+    title: "Manage Account",
+    nav,
+    grid
+  })
+}
+
+ async function updateAccount(req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  } = req.body
+  const updateResult = await accountModel.updateAccount(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  )
+
+  if (updateResult) {
+    const accountName = updateResult.account_firstname + " " + updateResult.account_lastname
+    req.flash("notice", `The ${accountName} was successfully updated.`)
+    res.redirect("/account/management")
+  } else {
+    const accountName = `${account_firstname} ${account_lastname}`
+    req.flash("notice", `Sorry, the update of ${accountName} failed.`)
+    res.status(501).render("account/update", {
+    title: "Update Account",
+    nav,
+    errors: null,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+    })
+  }
+}
+
+async function updatePassword(req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    hashedPassword,
+    account_id
+  } = req.body
+  hashedPassword = await bcrypt.hashSync(account_password, 10)
+  const updateResult = await accountModel.updatePassword(
+    hashedPassword,
+    account_id
+  )
+
+  if (updateResult) {
+    req.flash("notice", `The password was successfully updated.`)
+    res.redirect("/account/management")
+  } else {
+    req.flash("notice", `Sorry, the change of the password failed.`)
+    res.status(501).render("account/update", {
+    title: "Update Account",
+    nav,
+    errors: null,
+    account_password,
+    account_id
+    })
+  }
+}
+
+ module.exports ={accountLogin, registerAccount, buildLogin, buildRegister, buildSuccess, buildManage, buildUpdate, updateAccount, updatePassword, manageAccount}

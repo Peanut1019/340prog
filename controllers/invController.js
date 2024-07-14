@@ -1,6 +1,5 @@
-const {body, validationResult } = require("express-validator")
+const { validationResult } = require("express-validator")
 const invModel = require("../models/inventory-model")
-const Util = require("../utilities/")
 const utilities = require("../utilities/")
 const invCont = {}
 
@@ -59,7 +58,7 @@ invCont.buildManage = async function (req, res, next) {
     errors: null,
   })
 }
-async function buildClass(req, res, next) {
+invCont.buildClass = async function (req, res, next) {
   let nav = await utilities.getNav()
   res.render("inventory/add-classification", {
     title: "Add Classification",
@@ -71,7 +70,7 @@ async function buildClass(req, res, next) {
 /* ****************************************
 *  Process Classification
 * *************************************** */
-async function registerClass(req, res) {
+invCont.registerClass = async function (req, res) {
   let nav = await utilities.getNav()
   const { classification_name } = req.body
 
@@ -99,7 +98,7 @@ async function registerClass(req, res) {
   }
 }
 
-async function addInventory(req, res) {
+invCont.addInventory = async function (req, res) {
   let nav = await utilities.getNav()
   const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
 
@@ -295,5 +294,4 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 }
 
-module.exports = {registerClass, buildClass, addInventory }
 module.exports = invCont
