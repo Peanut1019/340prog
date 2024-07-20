@@ -64,6 +64,14 @@ async function buildRegister(req, res, next) {
       errors: null,
     })
   }
+  async function buildDelete(req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("account/delete", {
+      title: "Delete Account",
+      nav,
+      errors: null,
+    })
+  }
   /* ****************************************
 *  Process Registration
 * *************************************** */
@@ -212,5 +220,35 @@ async function updatePassword(req, res, next) {
     })
   }
 }
+async function deleteAccount(req, res, next) {
+let nav = await utilities.getNav()
+  const {
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_password,
+    account_id
+  } = req.body
+  const deleteResult = await accountModel.deleteAccount(account_id)
 
- module.exports ={accountLogin, registerAccount, buildLogin, buildRegister, buildSuccess, buildManage, buildUpdate, updateAccount, updatePassword, manageAccount}
+  if (deleteResult) {
+    const accName = deleteResult.account_firstname + " " + deleteResult.account_lastname
+    req.flash("notice", `The ${accName} was successfully deleted.`)
+    res.redirect("/account/")
+  } else {
+    const accName = `${account_firstname} ${account_lastname}`
+    req.flash("notice", "Sorry, the deletion failed.")
+    res.status(501).render("account/delete", {
+    title: "Delete " + accName,
+    nav,
+    errors: null,
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_password,
+    account_id
+    })
+  }
+}
+
+ module.exports ={accountLogin, registerAccount, buildLogin, buildRegister, buildSuccess, buildManage, buildUpdate, updateAccount, updatePassword, manageAccount, buildDelete, deleteAccount}
