@@ -8,6 +8,7 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin))
 router.get("/registration", utilities.handleErrors(accountController.buildRegister))
 router.get("/success", utilities.handleErrors(accountController.buildSuccess))
 router.get("/update", utilities.handleErrors(accountController.buildUpdate))
+router.get("/delete", utilities.handleErrors(accountController.buildDelete))
 
 router.post(
   "/management",
@@ -31,5 +32,10 @@ router.post(
     regValidate.checkUpdateData,
     utilities.handleErrors(accountController.updateAccount),
     utilities.handleErrors(accountController.updatePassword)
+  )
+  router.post(
+    "/delete",
+    regValidate.checkUpdateData,
+    utilities.handleErrors(accountController.deleteAccount)
   )
 module.exports = router;
